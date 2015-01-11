@@ -1,13 +1,9 @@
+ConsumptionData <- read.csv("~/Desktop/household_power_consumption 2.txt", nrows=2880, skip=66637, sep=";", header=T)
+header <- read.csv("~/Desktop/household_power_consumption 2.txt", nrows=1, header = FALSE, sep=";")
 
-data <- read.table("household_power_consumption 2.csv", header = T, sep = ";", colClasses = "character")
+colnames(ConsumptionData) <- unlist(header)
 
-Data <- data[data$Date == "1/2/2007" | data$Date == "2/2/2007",]
-
-attach(Data)
-
-x <- as.numeric(Global_active_power)
-
-hist(x, ylim=c(0,1200), main="Global Active Power", xlab = "Global Active Power (kilowatts)", col = "red")
+hist(ConsumptionData$Global_active_power, ylim=c(0,1200), main="Global Active Power", xlab = "Global Active Power (kilowatts)", col = "red")
 
 dev.copy(png, file = "plot1.png")
 

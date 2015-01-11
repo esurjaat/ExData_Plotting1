@@ -1,9 +1,9 @@
+ConsumptionData <- read.csv("~/Desktop/household_power_consumption 2.txt", nrows=2880, skip=66637, sep=";", header=T)
+header <- read.csv("~/Desktop/household_power_consumption 2.txt", nrows=1, header = FALSE, sep=";")
 
-data <- read.table("household_power_consumption 2.csv", header = T, sep = ";", colClasses = "character")
+colnames(ConsumptionData) <- unlist(header)
 
-Data <- data[data$Date == "1/2/2007" | data$Date == "2/2/2007",]
-
-attach(Data)
+attach(ConsumptionData)
 
 png(file="plot4.png")
 
@@ -30,7 +30,7 @@ points(Sub_metering_3, type = "line", col = "blue")
 
 axis(side = 1, at = at, labels = c("Thu", "Fri", "Sat"))
 
-legend('topright',names(c(Data[7],Data[8],Data[9])), col = c("black","red","blue"),lty = 1, bty="n")
+legend('topright',names(c(ConsumptionData[7],ConsumptionData[8],ConsumptionData[9])), col = c("black","red","blue"),lty = 1, bty="n")
 
 #Bottom-right Plot
 plot(Global_reactive_power, type="line", xaxt="n", xlab="datetime")
